@@ -54,13 +54,13 @@ public class SimulationManager : MonoBehaviour
         ComputeBuffer computeBuffer = new ComputeBuffer(cubeData.Length, totalsize);
         for (int i = 0; i < objectCount; i++)
         {
-
+            Debug.Log("Check");
             cubeData[i].position = cubeHolders[i].transform.position;
         }
         computeBuffer.SetData(cubeData);
         cubeController.SetBuffer(0, "cubes", computeBuffer);
         cubeController.SetFloat("t", Time.deltaTime);
-        cubeController.Dispatch(0, cubeData.Length / 8, cubeData.Length / 8, cubeData.Length / 8);
+        cubeController.Dispatch(0, cubeData.Length / 8, cubeData.Length / 8, 1);
         computeBuffer.GetData(cubeData);
         for (int i = 0; i < cubeHolders.Length; i++)
         {
