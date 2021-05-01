@@ -90,12 +90,13 @@ public class SimulationManager : MonoBehaviour
             computeBuffer.GetData(cubeData);
             for (int i = 0; i < cubeHolders.Length; i++)
             {
-                if (cubeHolders[i].transform.position.y > 1)
+                if (cubeHolders[i].transform.position.y > 2)
                 {
                     cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime;
                 }
                 else
                 {
+                    cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
                     cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
                 }
             }
