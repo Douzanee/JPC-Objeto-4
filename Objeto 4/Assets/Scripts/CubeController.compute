@@ -8,9 +8,6 @@ struct Cube {
     float v2;
     float mass;
     float dTime;
-    float time;
-    float t1;
-    float t2;
     float force;
 };
 
@@ -26,8 +23,6 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     
     Cube cube = cubes[id.x];
 
-    cube.dTime = cube.t2 - cube.t1;
-    cube.t1 = cube.t2;
     //v2 = v1 + (force / mass) * dTime;
     //cube.force = cube.mass * 9.8f;
     cube.v2 = cube.v1 + 9.8f * cube.dTime;

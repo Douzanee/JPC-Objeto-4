@@ -10,7 +10,7 @@ public class SimulationManager : MonoBehaviour
     {
         public Vector3 position;
         public Color color;
-        public float speed, mass, v1, v2, dTime, time, t1, t2, force;
+        public float speed, mass, v1, v2, dTime, force;
     }
 
     [SerializeField] TMP_InputField objectsInSimulationInput;
@@ -20,6 +20,7 @@ public class SimulationManager : MonoBehaviour
     public int totalSize;
     public float minMass;
     public float maxMass;
+    public float oldTime, newTime;
     public GameObject cubeObj;
     public GameObject[] cubeHolders;
     Vector3 startPosition;
@@ -58,13 +59,12 @@ public class SimulationManager : MonoBehaviour
                 cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", startColor);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
                 //cubeData[i].speed = 9.8f * Time.deltaTime;
-                cubeData[i].t1 = Time.time;
-                cubeData[i].t2 = Time.time;
+                cubeData[i].dTime = 0;
                 cubeData[i].position = cubeHolders[i].transform.position;
             }
             int colorSize = sizeof(float) * 4;
             int vector3Size = sizeof(float) * 3;
-            int variables = sizeof(float) * 9;
+            int variables = sizeof(float) * 6;
             totalSize = colorSize + vector3Size + variables;
 
             started = true;
@@ -78,10 +78,10 @@ public class SimulationManager : MonoBehaviour
         }
         if (started)
         {
-            
+            newTime += 1 * Time.deltaTime;
             for (int i = 0; i < objectCount; i++)
             {
-                cubeData[i].t2 = Time.time;
+                cubeData[i].dTime = newTime - oldTime;
             }
             computeBuffer = new ComputeBuffer(cubeData.Length, totalSize);
             computeBuffer.SetData(cubeData);
@@ -100,6 +100,7 @@ public class SimulationManager : MonoBehaviour
                 }
             }
             computeBuffer.Dispose();
+            oldTime = newTime;
 
         }
     }
