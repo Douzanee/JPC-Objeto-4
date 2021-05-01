@@ -2321,10 +2321,11 @@ MonoBehaviour:
   objectsInSimulationInput: {fileID: 317960020}
   minMassInput: {fileID: 395175109}
   maxMassInput: {fileID: 663565484}
+  cubeController: {fileID: 7200000, guid: cd6201954a9ebff49a865ee6ff61ea6c, type: 3}
   objectCount: 0
   minMass: 0
   maxMass: 0
-  cube: {fileID: 2960882517775025274, guid: 7a88dc052b11275418028a8f7fea9557, type: 3}
+  cubeGO: {fileID: 2960882517775025274, guid: 7a88dc052b11275418028a8f7fea9557, type: 3}
 --- !u!4 &1077874800
 Transform:
   m_ObjectHideFlags: 0
