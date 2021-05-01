@@ -68,35 +68,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11274}
+      Script: {instanceID: 11306}
     - Class: 114
-      Script: {instanceID: 11472}
+      Script: {instanceID: 11504}
     - Class: 114
-      Script: {instanceID: 11494}
+      Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 11588}
+      Script: {instanceID: 11620}
     - Class: 114
-      Script: {instanceID: 11670}
+      Script: {instanceID: 11702}
     - Class: 114
-      Script: {instanceID: 11858}
+      Script: {instanceID: 11890}
     - Class: 114
-      Script: {instanceID: 11884}
+      Script: {instanceID: 11916}
     - Class: 114
-      Script: {instanceID: 12242}
+      Script: {instanceID: 12274}
     - Class: 114
-      Script: {instanceID: 12462}
+      Script: {instanceID: 12494}
     - Class: 114
-      Script: {instanceID: 12476}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12658}
+      Script: {instanceID: 12690}
     - Class: 114
-      Script: {instanceID: 12720}
-    - Class: 114
-      Script: {instanceID: 12840}
+      Script: {instanceID: 12752}
     - Class: 114
       Script: {instanceID: 12872}
     - Class: 114
-      Script: {instanceID: 13072}
+      Script: {instanceID: 12904}
+    - Class: 114
+      Script: {instanceID: 13104}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -543,4 +543,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/felig/Desktop/Build Tarefa 4 Consoles/Objeto 4.exe
+  playerPath: D:/Consoles/Objeto 4/Build_Douzane/Objeto 4.exe
