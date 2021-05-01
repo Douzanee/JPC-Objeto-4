@@ -1,47 +1,78 @@
 Base path: 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data', plugins path 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
+  insize=968 outsize=967 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=893 outsize=860 ok=1
+  error: 2 plat 4 at CubeController.compute(29): redefinition of 'cube'
+  api=4 insize=967 outsize=0 ok=0
 Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
+  insize=969 outsize=968 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=893 outsize=860 ok=1
+  error: 2 plat 4 at CubeController.compute(29): redefinition of 'cube'
+  api=4 insize=968 outsize=0 ok=0
 Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
+  insize=964 outsize=963 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=893 outsize=860 ok=1
+  api=4 insize=963 outsize=536 ok=1
 Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
+  insize=965 outsize=964 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=893 outsize=860 ok=1
+  error: 2 plat 4 at CubeController.compute(22): undeclared identifier 'cube'
+  api=4 insize=964 outsize=0 ok=0
 Cmd: preprocessCompute
-  insize=893 outsize=892 ok=1
+  insize=962 outsize=961 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=892 outsize=860 ok=1
+  api=4 insize=961 outsize=536 ok=1
 Cmd: preprocessCompute
-  insize=909 outsize=908 ok=1
+  insize=966 outsize=965 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=908 outsize=536 ok=1
+  api=4 insize=965 outsize=536 ok=1
 Cmd: preprocessCompute
-  insize=912 outsize=911 ok=1
+  insize=966 outsize=965 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=911 outsize=536 ok=1
+  api=4 insize=965 outsize=532 ok=1
+Cmd: preprocessCompute
+  insize=949 outsize=948 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=948 outsize=532 ok=1
+Cmd: preprocessCompute
+  insize=949 outsize=948 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=948 outsize=532 ok=1
 Cmd: disassembleShader
-  api=4 insize=404 outsize=1123 ok=1
+  api=4 insize=400 outsize=1123 ok=1
 Cmd: preprocessCompute
-  insize=899 outsize=898 ok=1
+  insize=915 outsize=914 ok=1
+Cmd: preprocessCompute
+  insize=901 outsize=900 ok=1
 Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(23): undeclared identifier 'rand'
-  api=4 insize=898 outsize=0 ok=0
+  api=4 insize=900 outsize=532 ok=1
 Cmd: preprocessCompute
-  insize=891 outsize=890 ok=1
-Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
+  insize=892 outsize=891 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=893 outsize=860 ok=1
+  api=4 insize=891 outsize=896 ok=1
 Cmd: preprocessCompute
-  insize=912 outsize=911 ok=1
+  insize=846 outsize=845 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=911 outsize=536 ok=1
+  error: 2 plat 4 at CubeController.compute(21): invalid subscript 't'
+  api=4 insize=845 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=855 outsize=854 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=854 outsize=836 ok=1
+Cmd: disassembleShader
+  api=4 insize=704 outsize=1624 ok=1
+Cmd: preprocessCompute
+  insize=855 outsize=854 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=854 outsize=836 ok=1
+Cmd: preprocessCompute
+  insize=855 outsize=854 ok=1
+Cmd: preprocessCompute
+  insize=855 outsize=854 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=854 outsize=836 ok=1
+Cmd: preprocessCompute
+  insize=872 outsize=871 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=871 outsize=836 ok=1
