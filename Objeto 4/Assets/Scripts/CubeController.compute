@@ -1,0 +1,17 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+
+
+RWStructuredBuffer<Cube> cubes;
+float position, mass, speed, deltaT, tI, t, force, aceleration;
+float4 color;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    Cube cube = cubes[id.x];
+
+    speed = 9.8 * t;
+    position = position - speed * t;
+}
