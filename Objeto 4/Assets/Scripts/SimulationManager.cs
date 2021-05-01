@@ -24,7 +24,7 @@ public class SimulationManager : MonoBehaviour
     Cube[] cubeData;
     [SerializeField] ComputeShader cubeController;
     [SerializeField] int iteractions = 50;
-    private bool started = false;
+    [SerializeField] bool started = false;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +51,7 @@ public class SimulationManager : MonoBehaviour
             }
             started = true;
         }
-        int totalsize = 4 * sizeof(float) + 3 * sizeof(float) + 3 * sizeof(float);
+        int totalsize = 4 * sizeof(float) + 3 * sizeof(float) + 4 * sizeof(float);
         ComputeBuffer computeBuffer = new ComputeBuffer(cubeData.Length, totalsize);
         computeBuffer.SetData(cubeData);
         cubeController.SetBuffer(0, "cubes", computeBuffer);

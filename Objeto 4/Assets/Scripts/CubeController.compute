@@ -33,7 +33,5 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     }
     speed = 9.8 * t;
     position = position - speed * t;
-
-    cube.position = float3(position);
     cubes[id.x] = cube;
 }
