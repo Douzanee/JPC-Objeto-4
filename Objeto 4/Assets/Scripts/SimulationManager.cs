@@ -30,15 +30,40 @@ public class SimulationManager : MonoBehaviour
     public Material material;
     ComputeBuffer computeBuffer;
     private int finalized;
+    public GameObject gpuButton;
+    public GameObject cpuButton;
 
+    private bool cpustarted = false;
     // Start is called before the first frame update
     void Start()
     {
         startPosition = Vector3.up * 100;
     }
+    public void StartSimulationCPU()
+    {
+        cpuButton.SetActive(false);
+        objectCount = int.Parse(objectsInSimulationInput.text);
+        minMass = float.Parse(minMassInput.text);
+        maxMass = float.Parse(maxMassInput.text);
+        cubeHolders = new GameObject[objectCount];
+        Color startColor;
 
+        for (int i = 0; i < objectCount; i++)
+        {
+            startColor = Random.ColorHSV();
+            float offsetX = -objectCount / 2 + i;
+            cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y + 10, startPosition.z - 5), Quaternion.identity);
+            cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
+            cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+        }
+
+        cpustarted = true;
+
+    }
     public void StartSimulation()
     {
+        gpuButton.SetActive(false);
+
         if (started == false)
         {
             objectCount = int.Parse(objectsInSimulationInput.text);
@@ -108,6 +133,31 @@ public class SimulationManager : MonoBehaviour
             {
                 started = false;
             }
+        }
+
+        if (cpustarted)
+        {
+            for (int i = 0; i < cubeHolders.Length; i++)
+            {
+                if (cubeHolders[i].transform.position.y > 2)
+                {
+                    cubeHolders[i].transform.position += new Vector3(0, -10, 0) * Time.deltaTime;
+                }
+                else
+                {
+
+                    Color randomColor = Random.ColorHSV();
+                    cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
+                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", randomColor);
+                    finalized += 1;
+                }
+
+            }
+            if (finalized == cubeHolders.Length)
+            {
+                cpustarted = false;
+            }
+
         }
     }
 }
