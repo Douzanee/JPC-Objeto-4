@@ -12,21 +12,21 @@ struct Cube {
 RWStructuredBuffer<Cube> cubes;
 int iteraction;
 
-float rand(float2 co) 
-{
-    return(frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453)) * 1;
-}
-[numthreads(10,5,5)]
+//float rand(float2 co) 
+//{
+//    return(frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453)) * 1;
+//}
+[numthreads(4,1,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     Cube cube = cubes[id.x];
-    float _r = rand(float2(cube.color.r, cube.color.g));
-    float _g = rand(float2(cube.color.g, cube.color.b));
-    float _b = rand(float2(cube.color.b, cube.color.r));
-    cube.color = float4(_r, _g, _b, 1);
+    //float _r = rand(float2(cube.color.r, cube.color.g));
+    //float _g = rand(float2(cube.color.g, cube.color.b));
+    //float _b = rand(float2(cube.color.b, cube.color.r));
+    cube.color = float4(0.0, 0.0 ,0.0 , 1);
     cube.speed = 9.8 * cube.t;
     cube.position.z = cube.position.z;
     cube.position.y = cube.position.y - (cube.speed * cube.t);
-    cube.position.x = cube.position.x;
+    cube.position.x = cube.position.x; 
     cubes[id.x] = cube;
 }
