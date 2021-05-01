@@ -19,7 +19,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 {
     Cube cube = cubes[id.x];
     //cube.position.z = cube.position.z;
-    cube.position.y += cube.speed / 10;
+    cube.position.y += cube.speed / 1000;
    // cube.position.x = cube.position.x;
     cubes[id.x] = cube;
 
