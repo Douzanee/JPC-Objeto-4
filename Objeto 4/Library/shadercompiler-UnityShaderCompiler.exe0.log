@@ -1,78 +1,15 @@
 Base path: 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data', plugins path 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 Cmd: preprocessCompute
-  insize=855 outsize=854 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(17): incorrect number of arguments to numeric-type constructor
-  api=4 insize=854 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=909 outsize=908 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(17): incorrect number of arguments to numeric-type constructor
-  api=4 insize=908 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=908 outsize=907 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(17): incorrect number of arguments to numeric-type constructor
-  api=4 insize=907 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=906 outsize=905 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(16): incorrect number of arguments to numeric-type constructor
-  api=4 insize=905 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=890 outsize=889 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(33): undeclared identifier 'speed'
-  api=4 insize=889 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=924 outsize=923 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(36): undeclared identifier 'position'
-  api=4 insize=923 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=891 outsize=890 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=890 outsize=1162 ok=1
-Cmd: disassembleShader
-  api=4 insize=944 outsize=1996 ok=1
-Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=893 outsize=1162 ok=1
-Cmd: preprocessCompute
-  insize=894 outsize=893 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=893 outsize=1162 ok=1
-Cmd: preprocessCompute
-  insize=891 outsize=890 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=890 outsize=1162 ok=1
-Cmd: preprocessCompute
-  insize=895 outsize=894 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=894 outsize=950 ok=1
-Cmd: preprocessCompute
   insize=896 outsize=895 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=895 outsize=950 ok=1
+  error: 2 plat 4 at CubeController.compute(19): the product of the arguments of numthreads(64,64,64) must be less than or equal to 1024
+  api=4 insize=895 outsize=0 ok=0
 Cmd: preprocessCompute
-  insize=817 outsize=816 ok=1
-Cmd: preprocessCompute
-  insize=813 outsize=812 ok=1
+  insize=894 outsize=893 ok=1
 Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(29): syntax error: unexpected token 'cubes'
-  api=4 insize=812 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=816 outsize=815 ok=1
-Cmd: compileComputeKernel
-  error: 2 plat 4 at CubeController.compute(29): syntax error: unexpected token 'cubes'
-  api=4 insize=815 outsize=0 ok=0
-Cmd: preprocessCompute
-  insize=813 outsize=812 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=812 outsize=860 ok=1
-Cmd: preprocessCompute
-  insize=893 outsize=892 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=892 outsize=860 ok=1
+  api=4 insize=893 outsize=860 ok=1
+Cmd: disassembleShader
+  api=4 insize=728 outsize=1687 ok=1
+
+Quitting shader compiler process
