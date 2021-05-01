@@ -1,2 +1,5 @@
-Base path: 'C:/Program Files/Unity/Hub/Editor/2019.4.15f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.4.15f1/Editor/Data/PlaybackEngines'
+Base path: 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data', plugins path 'D:/NewUnityFlow 2020/2019.4.15f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  error: 2 plat 4 at CubeController.compute(19): incorrect number of arguments to numeric-type constructor
+  api=4 insize=966 outsize=0 ok=0
