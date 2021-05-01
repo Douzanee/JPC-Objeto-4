@@ -4,8 +4,14 @@
 struct Cube {
     float3 position;
     float4 color;
-    float speed;
+    float v1;
+    float v2;
     float mass;
+    float dTime;
+    float time;
+    float t1;
+    float t2;
+    float force;
 };
 
 RWStructuredBuffer<Cube> cubes;
@@ -14,13 +20,21 @@ float rand(float2 co)
 {
     return(frac(sin(dot(co.xy, float2(12.9898, 78233))) * 43758.5453)) * 1;
 }
-[numthreads(11,3,1)]
+[numthreads(12,3,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     
     Cube cube = cubes[id.x];
+
+    cube.dTime = cube.t2 - cube.t1;
+    cube.t1 = cube.t2;
+    //v2 = v1 + (force / mass) * dTime;
+    //cube.force = cube.mass * 9.8f;
+    cube.v2 = cube.v1 + 9.8f * cube.dTime;
+    cube.position.y += cube.v2;
+
     //cube.position.z = cube.position.z;
-    cube.position.y += cube.speed / 1000;
+    //cube.position.y += cube.speed / 1000;
    // cube.position.x = cube.position.x;
     cubes[id.x] = cube;
 
