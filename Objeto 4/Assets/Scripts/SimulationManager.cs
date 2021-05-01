@@ -30,6 +30,7 @@ public class SimulationManager : MonoBehaviour
     public Material material;
     ComputeBuffer computeBuffer;
     private int finalized;
+    private float localSpeed;
     public GameObject gpuButton;
     public GameObject cpuButton;
 
@@ -52,7 +53,7 @@ public class SimulationManager : MonoBehaviour
         {
             startColor = Random.ColorHSV();
             float offsetX = -objectCount / 2 + i;
-            cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y + 10, startPosition.z - 5), Quaternion.identity);
+            cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z - 5), Quaternion.identity);
             cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
             cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
         }
@@ -78,7 +79,7 @@ public class SimulationManager : MonoBehaviour
             {
                 startColor = Random.ColorHSV();
                 float offsetX = -objectCount / 2 + i;
-                cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y + 10, startPosition.z), Quaternion.identity);
+                cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z), Quaternion.identity);
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].position = cubeHolders[i].transform.position;
                 cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
@@ -137,11 +138,14 @@ public class SimulationManager : MonoBehaviour
 
         if (cpustarted)
         {
+            newTime += 1 * Time.deltaTime;
+            localSpeed += newTime * 9.8f;
+
             for (int i = 0; i < cubeHolders.Length; i++)
             {
                 if (cubeHolders[i].transform.position.y > 2)
                 {
-                    cubeHolders[i].transform.position += new Vector3(0, -10, 0) * Time.deltaTime;
+                    cubeHolders[i].transform.position -= new Vector3(0, localSpeed, 0) * Time.deltaTime;
                 }
                 else
                 {
@@ -158,6 +162,7 @@ public class SimulationManager : MonoBehaviour
                 cpustarted = false;
             }
 
+            oldTime = newTime;
         }
     }
 }

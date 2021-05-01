@@ -68,35 +68,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11306}
+      Script: {instanceID: 11304}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11502}
     - Class: 114
-      Script: {instanceID: 11526}
+      Script: {instanceID: 11524}
     - Class: 114
-      Script: {instanceID: 11620}
+      Script: {instanceID: 11618}
     - Class: 114
-      Script: {instanceID: 11702}
+      Script: {instanceID: 11700}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11888}
     - Class: 114
-      Script: {instanceID: 11916}
+      Script: {instanceID: 11914}
     - Class: 114
-      Script: {instanceID: 12274}
+      Script: {instanceID: 12272}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12492}
     - Class: 114
-      Script: {instanceID: 12508}
+      Script: {instanceID: 12506}
     - Class: 114
-      Script: {instanceID: 12690}
+      Script: {instanceID: 12686}
     - Class: 114
-      Script: {instanceID: 12752}
+      Script: {instanceID: 12748}
     - Class: 114
-      Script: {instanceID: 12872}
+      Script: {instanceID: 12868}
     - Class: 114
-      Script: {instanceID: 12904}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13100}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -428,7 +428,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: b6e4dcc8d431e4f6a0e8409595416268
+      Hash: dcfd7a6091da6773dc29edb531d5d011
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SimulationManager
@@ -543,4 +543,5 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/Consoles/Objeto 4/Build_Douzane/Objeto 4.exe
+  playerPath: "C:/Users/felig/Documents/Faculdade/5\xB0 Per\xEDodo/Jogos para Consoles/Tarefa
+    4/Build_1.0/Objeto 4.exe"
