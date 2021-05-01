@@ -33,6 +33,7 @@ public class SimulationManager : MonoBehaviour
     private float localSpeed;
     public GameObject gpuButton;
     public GameObject cpuButton;
+    [SerializeField] int iteractions;
 
     private bool cpustarted = false;
     // Start is called before the first frame update
@@ -111,6 +112,7 @@ public class SimulationManager : MonoBehaviour
             }
             computeBuffer = new ComputeBuffer(cubeData.Length, totalSize);
             computeBuffer.SetData(cubeData);
+            cubeController.SetInt("iteractions",iteractions);
             cubeController.SetBuffer(0, "cubes", computeBuffer);
             cubeController.Dispatch(0, cubeData.Length / 12, cubeData.Length / 3, 1);
             computeBuffer.GetData(cubeData);
@@ -152,7 +154,10 @@ public class SimulationManager : MonoBehaviour
 
                     Color randomColor = Random.ColorHSV();
                     cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
-                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", randomColor);
+                    for (int j = 0; j < iteractions; j++)
+                    {
+                        cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", randomColor);
+                    }
                     finalized += 1;
                 }
 
