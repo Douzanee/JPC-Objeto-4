@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SimulationManager : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class SimulationManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            started = false;
+            SceneManager.LoadScene(0);
         }
         if (started)
         {
