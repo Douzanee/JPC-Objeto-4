@@ -42,15 +42,20 @@ public class SimulationManager : MonoBehaviour
             cubeData = new Cube[objectCount];
             cubeHolders = new GameObject[objectCount];
 
+            Color startColor;
+
             for (int i = 0; i < objectCount; i++)
             {
+                startColor = Random.ColorHSV();
                 float offsetX = -objectCount / 2 + i;
                 cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y + 10, startPosition.z), Quaternion.identity);
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].position = cubeHolders[i].transform.position;
                 cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
+                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", startColor);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
                 cubeData[i].speed = 9.8f * Time.time;
+                cubeData[i].position = cubeHolders[i].transform.position;
             }
             started = true;
         }
@@ -64,13 +69,13 @@ public class SimulationManager : MonoBehaviour
             int variables = sizeof(float) * 2;
             int totalSize = colorSize + vector3Size + variables;
             ComputeBuffer computeBuffer = new ComputeBuffer(cubeData.Length, totalSize);
-            for (int i = 0; i < objectCount; i++)
-            {
-                cubeData[i].position = cubeHolders[i].transform.position;
-            }
+            //for (int i = 0; i < objectCount; i++)
+            //{
+            //    cubeData[i].position = cubeHolders[i].transform.position;
+            //}
             computeBuffer.SetData(cubeData);
             cubeController.SetBuffer(0, "cubes", computeBuffer);
-            cubeController.Dispatch(0, cubeData.Length / 4, cubeData.Length / 8, 1);
+            cubeController.Dispatch(0, cubeData.Length / 11, cubeData.Length / 3, 1);
             computeBuffer.GetData(cubeData);
             for (int i = 0; i < cubeHolders.Length; i++)
             {

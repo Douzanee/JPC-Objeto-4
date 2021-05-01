@@ -12,14 +12,14 @@ RWStructuredBuffer<Cube> cubes;
 
 float rand(float2 co) 
 {
-    return(frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453)) * 1;
+    return(frac(sin(dot(co.xy, float2(12.9898, 78233))) * 43758.5453)) * 1;
 }
-[numthreads(5,9,1)]
+[numthreads(11,3,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     Cube cube = cubes[id.x];
     //cube.position.z = cube.position.z;
-    cube.position.y += (cube.position.y * cube.speed);
+    cube.position.y += cube.speed / 10;
    // cube.position.x = cube.position.x;
     cubes[id.x] = cube;
 
