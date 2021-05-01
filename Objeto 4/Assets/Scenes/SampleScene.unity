@@ -1923,8 +1923,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.40156642, g: 0.41663283, b: 0.6037736, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1939,7 +1939,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1964,13 +1964,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -10, y: 40, z: -40}
+  m_LocalRotation: {x: 0.041924108, y: -0, z: -0, w: 0.9991208}
+  m_LocalPosition: {x: 0, y: 37, z: -62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.806, y: 0, z: 0}
 --- !u!1 &985002016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,8 +2322,11 @@ MonoBehaviour:
   minMassInput: {fileID: 395175109}
   maxMassInput: {fileID: 663565484}
   objectCount: 0
+  totalSize: 0
   minMass: 0
   maxMass: 0
+  oldTime: 0
+  newTime: 0
   cubeObj: {fileID: 2960882517775025274, guid: 7a88dc052b11275418028a8f7fea9557, type: 3}
   cubeHolders: []
   cubeController: {fileID: 7200000, guid: 017a5b67af6eac04682e86203b5a3e5b, type: 3}
@@ -2750,7 +2753,7 @@ Transform:
   m_GameObject: {fileID: 1715511958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.7, y: 0, z: 9.3}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 100, y: 10, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2

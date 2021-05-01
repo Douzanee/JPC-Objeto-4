@@ -29,6 +29,7 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] bool started = false;
     public Material material;
     ComputeBuffer computeBuffer;
+    private int finalized;
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +57,8 @@ public class SimulationManager : MonoBehaviour
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].position = cubeHolders[i].transform.position;
                 cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
-                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", startColor);
+                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
-                //cubeData[i].speed = 9.8f * Time.deltaTime;
                 cubeData[i].dTime = 0;
                 cubeData[i].position = cubeHolders[i].transform.position;
             }
@@ -98,11 +98,16 @@ public class SimulationManager : MonoBehaviour
                 {
                     cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
                     cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
+                    finalized += 1;
                 }
             }
             computeBuffer.Dispose();
             oldTime = newTime;
 
+            if (finalized == cubeHolders.Length)
+            {
+                started = false;
+            }
         }
     }
 }
