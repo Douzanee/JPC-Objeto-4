@@ -79,8 +79,14 @@ public class SimulationManager : MonoBehaviour
             computeBuffer.GetData(cubeData);
             for (int i = 0; i < cubeHolders.Length; i++)
             {
-                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
-                cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime;
+                if (cubeHolders[i].transform.position.y > 1)
+                {
+                    cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime;
+                }
+                else
+                {
+                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
+                }
             }
             computeBuffer.Dispose();
 
