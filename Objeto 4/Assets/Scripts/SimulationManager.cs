@@ -23,7 +23,6 @@ public class SimulationManager : MonoBehaviour
     Vector3 startPosition;
     Cube[] cubeData;
     [SerializeField] ComputeShader cubeController;
-    [SerializeField] int iteractions = 50;
     [SerializeField] bool started = false;
 
     // Start is called before the first frame update
@@ -53,10 +52,15 @@ public class SimulationManager : MonoBehaviour
         }
         int totalsize = 4 * sizeof(float) + 3 * sizeof(float) + 4 * sizeof(float);
         ComputeBuffer computeBuffer = new ComputeBuffer(cubeData.Length, totalsize);
+        for (int i = 0; i < objectCount; i++)
+        {
+
+            cubeData[i].position = cubeHolders[i].transform.position;
+        }
         computeBuffer.SetData(cubeData);
         cubeController.SetBuffer(0, "cubes", computeBuffer);
-        cubeController.SetInt("iteractions", iteractions);
-        cubeController.Dispatch(0, cubeData.Length / 10, 1, 1);
+        cubeController.SetFloat("t", Time.deltaTime);
+        cubeController.Dispatch(0, cubeData.Length / 8, cubeData.Length / 8, cubeData.Length / 8);
         computeBuffer.GetData(cubeData);
         for (int i = 0; i < cubeHolders.Length; i++)
         {

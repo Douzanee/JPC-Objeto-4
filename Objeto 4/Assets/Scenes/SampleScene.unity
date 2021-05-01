@@ -1574,13 +1574,13 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.9669811, g: 1, b: 0.9930679, a: 1}
-  m_Intensity: 1
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1613,7 +1613,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2327,7 +2327,7 @@ MonoBehaviour:
   cube: {fileID: 2960882517775025274, guid: 7a88dc052b11275418028a8f7fea9557, type: 3}
   cubeHolders: []
   cubeController: {fileID: 7200000, guid: 017a5b67af6eac04682e86203b5a3e5b, type: 3}
-  iteractions: 0
+  started: 0
 --- !u!4 &1077874800
 Transform:
   m_ObjectHideFlags: 0
