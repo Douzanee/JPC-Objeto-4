@@ -2330,10 +2330,10 @@ MonoBehaviour:
   maxMass: 0
   oldTime: 0
   newTime: 0
-  systemTime: 0
   cubeObj: {fileID: 2960882517775025274, guid: 7a88dc052b11275418028a8f7fea9557, type: 3}
   cubeHolders: []
   cubeController: {fileID: 7200000, guid: 017a5b67af6eac04682e86203b5a3e5b, type: 3}
+  colorController: {fileID: 7200000, guid: 1ef435e826722e14cbf84578cd293a1d, type: 3}
   started: 0
   material: {fileID: 2100000, guid: 2a63fea705c2a1b4a8850ac5da9510b7, type: 2}
   gpuButton: {fileID: 563383083}

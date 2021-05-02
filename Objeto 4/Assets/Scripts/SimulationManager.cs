@@ -27,9 +27,11 @@ public class SimulationManager : MonoBehaviour
     Vector3 startPosition;
     Cube[] cubeData;
     [SerializeField] ComputeShader cubeController;
+    [SerializeField] ComputeShader colorController;
     [SerializeField] bool started = false;
     public Material material;
     ComputeBuffer computeBuffer;
+    ComputeBuffer colorBuffer;
     private int finalized;
     private float localSpeed;
     public GameObject gpuButton;
@@ -121,14 +123,10 @@ public class SimulationManager : MonoBehaviour
             computeBuffer.SetData(cubeData);
             
             cubeController.SetInt("iteractions", iteractions);
-
             cubeController.SetBuffer(0, "cubes", computeBuffer);
-            
-            cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);
-            
+            cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);       
             computeBuffer.GetData(cubeData);
-
-            computeBuffer.Dispose();
+            computeBuffer.Dispose();        
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
@@ -137,9 +135,7 @@ public class SimulationManager : MonoBehaviour
                     cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime;
                 }
                 else
-                {
-                    cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
-                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
+                {                                       
                     finalized += 1;
                 }
             }
@@ -149,6 +145,21 @@ public class SimulationManager : MonoBehaviour
             {
                 timer.text = Time.time - startTime + "";
                 started = false;
+
+                colorBuffer = new ComputeBuffer(cubeData.Length, totalSize);
+                colorBuffer.SetData(cubeData);
+
+                colorController.SetInt("iteractions", iteractions);
+                colorController.SetBuffer(0, "cubes", colorBuffer);
+                colorController.Dispatch(0, cubeData.Length / 8, 1, 1);
+                colorBuffer.GetData(cubeData);
+                colorBuffer.Dispose();
+
+                for (int i = 0; i < cubeHolders.Length; i++)
+                {
+                    cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
+                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
+                }
             }
         }
 
