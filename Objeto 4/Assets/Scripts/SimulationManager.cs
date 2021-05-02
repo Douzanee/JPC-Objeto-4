@@ -32,14 +32,16 @@ public class SimulationManager : MonoBehaviour
     public Material material;
     ComputeBuffer computeBuffer;
     ComputeBuffer colorBuffer;
-    private int finalized;
+    private int finalized, recolored;
     private float localSpeed;
+    Color[] cubeColors, colorsVerify;
     public GameObject gpuButton;
     public GameObject cpuButton;
     [SerializeField] int iteractions;
     float startTime;
 
     private bool cpustarted = false;
+    private bool checkEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +54,10 @@ public class SimulationManager : MonoBehaviour
         minMass = float.Parse(minMassInput.text);
         maxMass = float.Parse(maxMassInput.text);
         cubeHolders = new GameObject[objectCount];
+        
         Color startColor;
+        cubeColors = new Color[objectCount];
+        colorsVerify = new Color[objectCount];
 
         for (int i = 0; i < objectCount; i++)
         {
@@ -61,6 +66,7 @@ public class SimulationManager : MonoBehaviour
             cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z - 5), Quaternion.identity);
             cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
             cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+            cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
         }
 
         startTime = Time.time;
@@ -80,6 +86,8 @@ public class SimulationManager : MonoBehaviour
             maxMass = float.Parse(maxMassInput.text);
             cubeData = new Cube[objectCount];
             cubeHolders = new GameObject[objectCount];
+            cubeColors = new Color[objectCount];
+            colorsVerify = new Color[objectCount];
 
             for (int i = 0; i < objectCount; i++)
             {
@@ -87,6 +95,7 @@ public class SimulationManager : MonoBehaviour
                 cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z), Quaternion.identity);
                 cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
                 cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Random.ColorHSV());
+                cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
                 cubeData[i].dTime = 0;
@@ -143,8 +152,8 @@ public class SimulationManager : MonoBehaviour
 
             if (finalized == cubeHolders.Length)
             {
-                timer.text = Time.time - startTime + "";
                 started = false;
+                checkEnd = true;
 
                 colorBuffer = new ComputeBuffer(cubeData.Length, totalSize);
                 colorBuffer.SetData(cubeData);
@@ -191,10 +200,37 @@ public class SimulationManager : MonoBehaviour
             if (finalized == cubeHolders.Length)
             {
                 cpustarted = false;
-                timer.text = Time.time - startTime + "";
-            }
+                checkEnd = true;
+            }        
 
             oldTime = newTime;
         }
+
+        if (checkEnd)
+        {
+            for (int i = 0; i < objectCount; i++)
+            {
+                if (cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color") != cubeColors[i])
+                {
+                    colorsVerify[i] = cubeColors[i];
+                }
+            }
+            foreach (Color c in colorsVerify)
+            {
+                if (c != null)
+                {
+                    recolored++;
+                }
+            }
+            if (recolored == objectCount)
+            {
+                StopTimer();
+            }
+        }
+    }
+
+    void StopTimer()
+    {
+        timer.text = Time.time - startTime + "";
     }
 }
