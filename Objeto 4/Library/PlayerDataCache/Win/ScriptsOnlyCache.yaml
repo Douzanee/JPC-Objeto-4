@@ -19,7 +19,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -68,35 +67,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11304}
+      Script: {instanceID: 11274}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11524}
+      Script: {instanceID: 11494}
     - Class: 114
-      Script: {instanceID: 11618}
+      Script: {instanceID: 11588}
     - Class: 114
-      Script: {instanceID: 11700}
+      Script: {instanceID: 11670}
     - Class: 114
-      Script: {instanceID: 11888}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 11914}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 12272}
+      Script: {instanceID: 12242}
     - Class: 114
-      Script: {instanceID: 12492}
+      Script: {instanceID: 12462}
     - Class: 114
-      Script: {instanceID: 12506}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12686}
+      Script: {instanceID: 12658}
     - Class: 114
-      Script: {instanceID: 12748}
+      Script: {instanceID: 12720}
     - Class: 114
-      Script: {instanceID: 12868}
+      Script: {instanceID: 12840}
     - Class: 114
-      Script: {instanceID: 12900}
+      Script: {instanceID: 12872}
     - Class: 114
-      Script: {instanceID: 13100}
+      Script: {instanceID: 13072}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -428,7 +427,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: dcfd7a6091da6773dc29edb531d5d011
+      Hash: 7ada3ec04ec536253d1e198268337867
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SimulationManager
@@ -544,4 +543,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
   playerPath: "C:/Users/felig/Documents/Faculdade/5\xB0 Per\xEDodo/Jogos para Consoles/Tarefa
-    4/Build_1.0/Objeto 4.exe"
+    4/Build_2.0/Objeto 4.exe"

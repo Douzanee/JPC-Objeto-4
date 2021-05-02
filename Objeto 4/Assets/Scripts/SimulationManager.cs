@@ -16,6 +16,7 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] TMP_InputField objectsInSimulationInput;
     [SerializeField] TMP_InputField minMassInput;
     [SerializeField] TMP_InputField maxMassInput;
+    [SerializeField] TextMeshProUGUI timer;
     public int objectCount;
     public int totalSize;
     public float minMass;
@@ -34,6 +35,7 @@ public class SimulationManager : MonoBehaviour
     public GameObject gpuButton;
     public GameObject cpuButton;
     [SerializeField] int iteractions;
+    float startTime;
 
     private bool cpustarted = false;
     // Start is called before the first frame update
@@ -58,6 +60,9 @@ public class SimulationManager : MonoBehaviour
             cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
             cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
         }
+
+        startTime = Time.time;
+        timer.text = startTime + "";
 
         cpustarted = true;
 
@@ -84,7 +89,7 @@ public class SimulationManager : MonoBehaviour
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].position = cubeHolders[i].transform.position;
                 cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
-                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", startColor);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
                 cubeData[i].dTime = 0;
                 cubeData[i].position = cubeHolders[i].transform.position;
@@ -96,8 +101,10 @@ public class SimulationManager : MonoBehaviour
 
             started = true;
         }
+        startTime = Time.time;
+        timer.text = startTime + "";
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -105,7 +112,7 @@ public class SimulationManager : MonoBehaviour
         }
         if (started)
         {
-            newTime += 1 * Time.deltaTime;
+            newTime += 1 * Time.fixedDeltaTime;
             for (int i = 0; i < objectCount; i++)
             {
                 cubeData[i].dTime = newTime - oldTime;
@@ -114,7 +121,7 @@ public class SimulationManager : MonoBehaviour
             computeBuffer.SetData(cubeData);
             cubeController.SetInt("iteractions",iteractions);
             cubeController.SetBuffer(0, "cubes", computeBuffer);
-            cubeController.Dispatch(0, cubeData.Length / 12, cubeData.Length / 3, 1);
+            cubeController.Dispatch(0, cubeData.Length / 64, cubeData.Length / 8, 1);
             computeBuffer.GetData(cubeData);
             for (int i = 0; i < cubeHolders.Length; i++)
             {
@@ -135,12 +142,13 @@ public class SimulationManager : MonoBehaviour
             if (finalized == cubeHolders.Length)
             {
                 started = false;
+                timer.text = Time.time - startTime + "";
             }
         }
 
         if (cpustarted)
         {
-            newTime += 1 * Time.deltaTime;
+            newTime += 1 * Time.fixedDeltaTime;
             localSpeed += newTime * 9.8f;
 
             for (int i = 0; i < cubeHolders.Length; i++)
@@ -152,10 +160,10 @@ public class SimulationManager : MonoBehaviour
                 else
                 {
 
-                    Color randomColor = Random.ColorHSV();
                     cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
                     for (int j = 0; j < iteractions; j++)
                     {
+                        Color randomColor = Random.ColorHSV();
                         cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", randomColor);
                     }
                     finalized += 1;
@@ -165,6 +173,7 @@ public class SimulationManager : MonoBehaviour
             if (finalized == cubeHolders.Length)
             {
                 cpustarted = false;
+                timer.text = Time.time - startTime + "";
             }
 
             oldTime = newTime;
