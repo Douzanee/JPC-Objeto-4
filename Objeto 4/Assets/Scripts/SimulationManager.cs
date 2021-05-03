@@ -90,6 +90,7 @@ public class SimulationManager : MonoBehaviour
             {
                 float offsetX = -objectCount / 2 + i;
                 cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z), Quaternion.identity);
+                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Random.ColorHSV());
                 cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
@@ -136,7 +137,7 @@ public class SimulationManager : MonoBehaviour
             {
                 if (cubeHolders[i].transform.position.y > 2)
                 {
-                    cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime;
+                    cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime; ;
                 }
                 else
                 {                                       
@@ -162,7 +163,7 @@ public class SimulationManager : MonoBehaviour
                 for (int i = 0; i < cubeHolders.Length; i++)
                 {
                     cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
-                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Random.ColorHSV());
+                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
                 }
             }
         }
