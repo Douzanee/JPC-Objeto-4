@@ -69,9 +69,6 @@ public class SimulationManager : MonoBehaviour
             cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
         }
 
-        startTime = Time.time;
-        timer.text = startTime + "";
-
         cpustarted = true;
 
     }
@@ -93,8 +90,6 @@ public class SimulationManager : MonoBehaviour
             {
                 float offsetX = -objectCount / 2 + i;
                 cubeHolders[i] = Instantiate(cubeObj, new Vector3(offsetX * 1.5f, startPosition.y, startPosition.z), Quaternion.identity);
-                cubeHolders[i].GetComponent<MeshRenderer>().material = new Material(material);
-                cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Random.ColorHSV());
                 cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
@@ -108,8 +103,6 @@ public class SimulationManager : MonoBehaviour
 
             started = true;
         }
-        startTime = Time.time;
-        timer.text = startTime + "";
     }
     private void FixedUpdate()
     {
@@ -136,6 +129,8 @@ public class SimulationManager : MonoBehaviour
             cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);       
             computeBuffer.GetData(cubeData);
             computeBuffer.Dispose();        
+
+
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
@@ -167,7 +162,7 @@ public class SimulationManager : MonoBehaviour
                 for (int i = 0; i < cubeHolders.Length; i++)
                 {
                     cubeHolders[i].transform.position = new Vector3(cubeHolders[i].transform.position.x, 1, cubeHolders[i].transform.position.z);
-                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", cubeData[i].color);
+                    cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Random.ColorHSV());
                 }
             }
         }
@@ -228,9 +223,14 @@ public class SimulationManager : MonoBehaviour
             }
         }
     }
+    public void StartTimer()
+    {
+        startTime = Time.time;
+    }
 
     void StopTimer()
     {
+        Debug.Log(startTime + " " + Time.time);
         timer.text = Time.time - startTime + "";
     }
 }
