@@ -1,10 +1,67 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2019.4.15f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.4.15f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 Cmd: preprocessCompute
-  insize=852 outsize=851 ok=1
+  insize=846 outsize=845 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=851 outsize=931 ok=1
+  api=4 insize=845 outsize=596 ok=1
 Cmd: preprocessCompute
-  insize=852 outsize=851 ok=1
+  insize=845 outsize=844 ok=1
+Cmd: preprocessCompute
+  insize=845 outsize=844 ok=1
+Cmd: preprocessCompute
+  insize=868 outsize=867 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=851 outsize=951 ok=1
+  error: 2 plat 4 at CubeController.compute(43): undeclared identifier 'dS'
+  api=4 insize=867 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=873 outsize=872 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=872 outsize=656 ok=1
+Cmd: preprocessCompute
+  insize=853 outsize=852 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=852 outsize=580 ok=1
+Cmd: preprocessCompute
+  insize=655 outsize=654 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=654 outsize=223 ok=1
+Cmd: preprocessCompute
+  insize=722 outsize=721 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=721 outsize=223 ok=1
+Cmd: preprocessCompute
+  insize=755 outsize=754 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=754 outsize=380 ok=1
+Cmd: preprocessCompute
+  insize=859 outsize=858 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=858 outsize=380 ok=1
+Cmd: preprocessCompute
+  insize=861 outsize=860 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=860 outsize=223 ok=1
+Cmd: preprocessCompute
+  insize=846 outsize=845 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=845 outsize=304 ok=1
+Cmd: preprocessCompute
+  insize=922 outsize=921 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at CubeController.compute(28): undeclared identifier 'v2'
+  api=4 insize=921 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=927 outsize=926 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at CubeController.compute(28): undeclared identifier 'cube'
+  api=4 insize=926 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=929 outsize=928 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=928 outsize=304 ok=1
+Cmd: preprocessCompute
+  insize=863 outsize=862 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=862 outsize=648 ok=1
+Cmd: preprocessCompute
+  insize=929 outsize=928 ok=1

@@ -8,9 +8,15 @@ public class SimulationManager : MonoBehaviour
 {
     struct Cube
     {
-        public Vector3 position;
+        public Vector3 p1;
+        public Vector3 p2;
         public Color color;
-        public float speed, mass, v1, v2, dTime, force;
+        public float speed;
+        public float mass;
+        public float v1;
+        public float v2;
+        public float dT;
+        public float dS;
     }
 
     [SerializeField] TMP_InputField objectsInSimulationInput;
@@ -33,7 +39,6 @@ public class SimulationManager : MonoBehaviour
     ComputeBuffer computeBuffer;
     ComputeBuffer colorBuffer;
     private int finalized, recolored;
-    private float localSpeed;
     Color[] cubeColors, colorsVerify;
     public GameObject gpuButton;
     public GameObject cpuButton;
@@ -53,6 +58,7 @@ public class SimulationManager : MonoBehaviour
         objectCount = int.Parse(objectsInSimulationInput.text);
         minMass = float.Parse(minMassInput.text);
         maxMass = float.Parse(maxMassInput.text);
+        cubeData = new Cube[objectCount];
         cubeHolders = new GameObject[objectCount];
         
         Color startColor;
@@ -94,11 +100,14 @@ public class SimulationManager : MonoBehaviour
                 cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
                 cubeData[i].mass = Random.Range(minMass, maxMass);
                 cubeData[i].color = cubeHolders[i].GetComponent<MeshRenderer>().material.color;
-                cubeData[i].dTime = 0;
-                cubeData[i].position = cubeHolders[i].transform.position;
+                cubeData[i].dT = 0;
+                cubeData[i].v1 = 0;
+                cubeData[i].v2 = 0;
+                cubeData[i].p1 = cubeHolders[i].transform.position;
+                cubeData[i].p2 = cubeHolders[i].transform.position;
             }
             int colorSize = sizeof(float) * 4;
-            int vector3Size = sizeof(float) * 3;
+            int vector3Size = sizeof(float) * 3 * 2;
             int variables = sizeof(float) * 6;
             totalSize = colorSize + vector3Size + variables;
 
@@ -117,27 +126,34 @@ public class SimulationManager : MonoBehaviour
         if (started)
         {
             newTime += 1 * Time.fixedDeltaTime;
+
             for (int i = 0; i < cubeHolders.Length; i++)
             {
-                cubeData[i].dTime = newTime - oldTime;
+                cubeData[i].dT = newTime - oldTime;
+                
             }
             computeBuffer = new ComputeBuffer(cubeData.Length, totalSize);
 
             computeBuffer.SetData(cubeData);
-            
-            cubeController.SetInt("iteractions", iteractions);
             cubeController.SetBuffer(0, "cubes", computeBuffer);
-            cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);       
-            computeBuffer.GetData(cubeData);
-            computeBuffer.Dispose();        
+            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
 
+            cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);
+            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
+
+            computeBuffer.GetData(cubeData);
+            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
+            //cubeData[0].v2 += 1;
+            computeBuffer.Dispose();
+            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
 
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
                 if (cubeHolders[i].transform.position.y > 2)
                 {
-                    cubeHolders[i].transform.position -= new Vector3(0, cubeData[i].position.y, 0) * Time.deltaTime; ;
+                    cubeHolders[i].transform.position = new Vector3(cubeData[i].p1.x, cubeData[i].p1.y, cubeData[i].p1.z);
+                    //Debug.Log(cubeData[i].v1 + 9.8f * cubeData[i].dT + " " + cubeData[i].v1 + " " + 9.8f * cubeData[i].dT);
                 }
                 else
                 {                                       
@@ -150,6 +166,7 @@ public class SimulationManager : MonoBehaviour
             {
                 started = false;
                 checkEnd = true;
+
 
                 colorBuffer = new ComputeBuffer(cubeData.Length, totalSize);
                 colorBuffer.SetData(cubeData);
@@ -171,13 +188,18 @@ public class SimulationManager : MonoBehaviour
         if (cpustarted)
         {
             newTime += 1 * Time.fixedDeltaTime;
-            localSpeed += newTime * 9.8f;
+            float dT = newTime - oldTime;
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
                 if (cubeHolders[i].transform.position.y > 2)
                 {
-                    cubeHolders[i].transform.position -= new Vector3(0, localSpeed, 0) * Time.deltaTime;
+                    cubeData[i].v2 = cubeData[i].v1 + 9.8f * dT ;
+
+                    cubeData[i].p1 = new Vector3(cubeData[i].p1.x, (cubeData[i].v1 + cubeData[i].v2) * dT / 2, cubeData[i].p1.z);
+
+                    cubeHolders[i].transform.position -= cubeData[i].p1;
+                    cubeData[i].v1 = cubeData[i].v2;
                 }
                 else
                 {
