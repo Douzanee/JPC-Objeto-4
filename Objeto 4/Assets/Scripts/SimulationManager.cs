@@ -72,6 +72,7 @@ public class SimulationManager : MonoBehaviour
             cubeHolders[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
             cubeColors[i] = cubeHolders[i].GetComponent<MeshRenderer>().material.GetColor("_Color");
         }
+        StartTimer();
 
         cpustarted = true;
 
@@ -109,6 +110,7 @@ public class SimulationManager : MonoBehaviour
             int vector3SizeFelipe = sizeof(float) * 3;
             int variables = sizeof(float) * 5;
             totalSize = colorSize + vector3Size + vector3SizeFelipe + variables;
+            StartTimer();
 
             started = true;
         }
