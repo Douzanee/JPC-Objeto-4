@@ -8,17 +8,15 @@ public class SimulationManager : MonoBehaviour
 {
     struct Cube
     {
-        public Vector3 p1;
+        public Vector3 position;
         public Vector3 p2;
         public Color color;
-        public float speed;
-        public float mass;
         public float v1;
         public float v2;
+        public float mass;
         public float dT;
         public float dS;
-    }
-
+    };
     [SerializeField] TMP_InputField objectsInSimulationInput;
     [SerializeField] TMP_InputField minMassInput;
     [SerializeField] TMP_InputField maxMassInput;
@@ -103,13 +101,14 @@ public class SimulationManager : MonoBehaviour
                 cubeData[i].dT = 0;
                 cubeData[i].v1 = 0;
                 cubeData[i].v2 = 0;
-                cubeData[i].p1 = cubeHolders[i].transform.position;
+                cubeData[i].position = cubeHolders[i].transform.position;
                 cubeData[i].p2 = cubeHolders[i].transform.position;
             }
             int colorSize = sizeof(float) * 4;
-            int vector3Size = sizeof(float) * 3 * 2;
-            int variables = sizeof(float) * 6;
-            totalSize = colorSize + vector3Size + variables;
+            int vector3Size = sizeof(float) * 3;
+            int vector3SizeFelipe = sizeof(float) * 3;
+            int variables = sizeof(float) * 5;
+            totalSize = colorSize + vector3Size + vector3SizeFelipe + variables;
 
             started = true;
         }
@@ -135,25 +134,22 @@ public class SimulationManager : MonoBehaviour
             computeBuffer = new ComputeBuffer(cubeData.Length, totalSize);
 
             computeBuffer.SetData(cubeData);
-            cubeController.SetBuffer(0, "cubes", computeBuffer);
-            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
 
-            cubeController.Dispatch(0, cubeData.Length / 20, 1, 1);
-            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
+            cubeController.SetBuffer(0, "cubes", computeBuffer);
+
+            cubeController.Dispatch(0, Mathf.CeilToInt(cubeData.Length / 4), 1, 1);
 
             computeBuffer.GetData(cubeData);
-            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
-            //cubeData[0].v2 += 1;
+            
             computeBuffer.Dispose();
-            Debug.Log(cubeData[0].dT + " " + cubeData[0].v2);
 
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
-                if (cubeHolders[i].transform.position.y > 2)
+                if (cubeHolders[i].transform.position.y > 1)
                 {
-                    cubeHolders[i].transform.position = new Vector3(cubeData[i].p1.x, cubeData[i].p1.y, cubeData[i].p1.z);
-                    //Debug.Log(cubeData[i].v1 + 9.8f * cubeData[i].dT + " " + cubeData[i].v1 + " " + 9.8f * cubeData[i].dT);
+                    cubeHolders[i].transform.position = new Vector3(cubeData[i].p2.x, cubeData[i].p2.y, cubeData[i].p2.z);
+                    
                 }
                 else
                 {                                       
@@ -173,7 +169,7 @@ public class SimulationManager : MonoBehaviour
 
                 colorController.SetInt("iteractions", iteractions);
                 colorController.SetBuffer(0, "cubes", colorBuffer);
-                colorController.Dispatch(0, cubeData.Length / 8, 1, 1);
+                colorController.Dispatch(0, Mathf.CeilToInt(cubeData.Length / 64), 1, 1);
                 colorBuffer.GetData(cubeData);
                 colorBuffer.Dispose();
 
@@ -192,13 +188,13 @@ public class SimulationManager : MonoBehaviour
 
             for (int i = 0; i < cubeHolders.Length; i++)
             {
-                if (cubeHolders[i].transform.position.y > 2)
+                if (cubeHolders[i].transform.position.y > 1)
                 {
                     cubeData[i].v2 = cubeData[i].v1 + 9.8f * dT ;
 
-                    cubeData[i].p1 = new Vector3(cubeData[i].p1.x, (cubeData[i].v1 + cubeData[i].v2) * dT / 2, cubeData[i].p1.z);
+                    cubeData[i].position = new Vector3(cubeData[i].position.x, (cubeData[i].v1 + cubeData[i].v2) * dT / 2, cubeData[i].position.z);
 
-                    cubeHolders[i].transform.position -= cubeData[i].p1;
+                    cubeHolders[i].transform.position -= cubeData[i].position;
                     cubeData[i].v1 = cubeData[i].v2;
                 }
                 else
@@ -248,12 +244,12 @@ public class SimulationManager : MonoBehaviour
     }
     public void StartTimer()
     {
-        startTime = Time.time;
+        startTime = Time.realtimeSinceStartup;
     }
 
     void StopTimer()
     {
-        Debug.Log(startTime + " " + Time.time);
-        timer.text = Time.time - startTime + "";
+        Debug.Log(startTime + " " + Time.realtimeSinceStartup);
+        timer.text = Time.realtimeSinceStartup - startTime + "";
     }
 }
