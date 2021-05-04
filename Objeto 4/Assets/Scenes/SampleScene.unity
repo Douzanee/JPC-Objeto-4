@@ -2338,7 +2338,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 2a63fea705c2a1b4a8850ac5da9510b7, type: 2}
   gpuButton: {fileID: 563383083}
   cpuButton: {fileID: 1337208852}
-  iteractions: 2000
+  iteractions: 3000
 --- !u!4 &1077874800
 Transform:
   m_ObjectHideFlags: 0
